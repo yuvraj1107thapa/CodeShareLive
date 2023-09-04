@@ -16,6 +16,11 @@ router
     }
   );
 
+router.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
 router
   .route("/register")
   .get(function (req, res, next) {
