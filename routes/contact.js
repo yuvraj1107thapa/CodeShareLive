@@ -1,6 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
+// contact form email
+var nodemailer = require("nodemailer");
+var config = require("../config");
+var nodemailerTransporter = nodemailer.createTransport(config.mailer);
+
 /* GET and POST contact page. */
 router
   .route("/")
@@ -22,6 +27,18 @@ router
         errorMessages: errors,
       });
     } else {
+      var mailDetails = {
+        from: "Yuvraj Thapa <iyuvrajthapa@gmail.com>",
+        to: config.mailer.auth.user,
+        subject: "A visitor left a message for you!",
+        text: req.body.message,
+      };
+
+      nodemailerTransporter.sendMail(mailDetails, function (error, info) {
+        if (error) {
+          return console.log(error);
+        }
+      });
       res.render("thankyou", { title: "Email successfully sent!" });
     }
   });
