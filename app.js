@@ -49,7 +49,6 @@ app.use(
     secret: config.sessionKey,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
   })
 );
 
@@ -57,6 +56,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// create session variable, if user is authenticated
+app.use(function (req, res, next) {
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+  }
+  next();
+});
 
 // form validation
 app.use(validator());
