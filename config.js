@@ -13,4 +13,8 @@ module.exports = {
   },
   dbConnString: "mongodb://127.0.0.1:27017/codesharelive",
   sessionKey: "CodeShareLiveYolomatic",
+  facebook: {
+    appID: "288781154956462",
+    appSecret: "290b1a5697c8b3a34f1b688ec0098499",
+  },
 };
