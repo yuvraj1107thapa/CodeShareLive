@@ -18,7 +18,7 @@ var login = require("./routes/login");
 var register = require("./routes/register");
 
 mongoose.connect(config.dbConnString, { useMongoClient: true });
-global.User = require("./models/user");
+global.User = require("./models/users.js");
 
 var app = express();
 
